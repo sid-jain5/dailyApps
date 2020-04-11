@@ -1,14 +1,14 @@
-package com.example.ToDo;
+package com.personal.dailyApps;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ToDoApplication {
+public class DailyAppsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ToDoApplication.class, args);
-		System.out.println("ToDo Application Running in background");
+		SpringApplication.run(DailyAppsApplication.class, args);
+		System.out.println("DailyApps Application Running in background");
 		//trying pushing
 		// trying push 2
 	}
