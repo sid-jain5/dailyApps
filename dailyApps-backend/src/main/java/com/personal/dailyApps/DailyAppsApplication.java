@@ -10,6 +10,7 @@ public class DailyAppsApplication {
 		SpringApplication.run(DailyAppsApplication.class, args);
 		System.out.println("DailyApps Application Running in background");
 		System.out.println("First Statement");
+		System.out.println("Second command");
 	}
 
 }
