@@ -1,0 +1,37 @@
+/*SET GLOBAL time_zone = '+3:00';*/
+
+DROP DATABASE if exists DAILYAPPS;
+CREATE DATABASE DAILYAPPS;
+USE DAILYAPPS;
+
+/* DAILYAPPS DATABASE TABLES */
+
+/*Users table*/
+CREATE TABLE USERS(
+	EMAIL_ID VARCHAR(50) NOT NULL UNIQUE,
+	USERNAME VARCHAR(15) NOT NULL UNIQUE,
+	NAME VARCHAR(50) NOT NULL,	
+	PHONE_NUMBER VARCHAR(10) NOT NULL UNIQUE,
+	PASSWORD VARCHAR(20) NOT NULL,
+	HASHED_PASSWORD VARCHAR(100) NOT NULL,
+	SECURITY_QUESTION VARCHAR(50),
+	SECURITY_ANSWER VARCHAR(20),
+	constraint DAILYAPPSDB_USERS_Pk primary key ( USERNAME )
+);
+
+/*sample data for user table*/
+INSERT INTO USERS VALUES ('scott@stark.com', 'Scott_123' ,'SCOTT', '8884967823', 'Scott@123', 
+'3284cbd43ac6fc733d7c3d2176e7a52bbaeba81471702ec332a0a65689cf16e3', 'School name', 'ckc');
+
+INSERT INTO USERS VALUES ('tony@stark.com', 'Tony_123' ,'TONY', '8875632142', 'Tony@123', 
+'1f7cbaa9168ffce48872d8fc4e5429dee55ed8f21d8d84bccd6aaa2a72ae1d79', 'Middle name', 'steve');
+
+INSERT INTO USERS VALUES ('steve@gmail.com', 'Steve_rocks' ,'STEVE', '9880253413', 'Steve@123', 
+'97661249431ccedba1711b78fb58eceb2c03054a07a7b684ad53048691b34435', 'college nam', 'jiit');
+
+INSERT INTO USERS VALUES ('banner@Uv.com', 'bannerABC' ,'BANNER', '8882039476', 'Banner@123', 
+'9a8d7e96acac7b73f1f9c994dd512df9068bb0549961e42333745c67a994e6f1','School name', 'ckc');
+
+/* Todo list msgs table for each user table
+
+/* END OF DAILYAPPS DATABASE */
