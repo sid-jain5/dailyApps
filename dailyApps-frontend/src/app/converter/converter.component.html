@@ -6,7 +6,6 @@
     </div>
     <div class="row">
         <div class="col-md-4 offset-md-4" style="background-color: darkcyan;">
-
             <div class="btn-group" style="margin-bottom: 10px;">
                 <div class="btn-group dropleft" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
@@ -16,15 +15,14 @@
                     </button>
                     <div class="dropdown-menu">
                         <h2 class="dropdown-header">Converters</h2>
-                        <button class="dropdown-item" (click)="onChange1($event.target.value)"
-                            *ngFor="let item of convertMap.keys()" [value]=item> {{ item }}</button>
-                        <!--[value]=item can be removed-->
-                    </div>
+                        <button class="dropdown-item" (click)="onChange1($event.target.value)" 
+                            *ngFor="let item of convertMapKeys" [value]=item>
+                            {{ item }}
+                        </button>
+                        <!-- [value]=item can be removed  (click)="onChange1($event.target.value) [value]=item" -->
+                    </div> 
                 </div>
             </div>
-
-            <!-- create sub-menu for each menu -->
-
         </div>
     </div>
     <div class="row">
@@ -35,18 +33,19 @@
                         <div class="btn-group dropleft" role="group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                Sub-unit
+                                {{ fromSubUnit }}
                             </button>
                             <div class="dropdown-menu">
-                                <h2 class="dropdown-header">Select Unit</h2>
-                                <button class="dropdown-item" (click)="onChange2($event.target.value)"
+                                <h2 class="dropdown-header">From unit</h2>
+                                <button class="dropdown-item" (click)="onChange2($event.target.value+'a')"
                                     *ngFor="let item of convertMap.get(currentConverter)" [value]=item>
                                     {{ item }}</button>
                             </div>
                         </div>
                     </div>
-                    <input type="number" class="form-control" formControlName="binaryNumber" id="binaryNumber"
+                    <input type="text" class="form-control" formControlName="binaryNumber" id="binaryNumber"
                         name="binaryNumber" aria-describedby="numberHelp" placeholder="Enter a binary number here..">
+                    {{ convert()}}
                     <small id="numberHelp" class="form-text text-muted">Number should only contain 0s and 1s</small>
                 </div>
 
@@ -55,20 +54,18 @@
                         <div class="btn-group dropleft" role="group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                Sub-unit
+                                {{ toSubUnit }}
                             </button>
                             <div class="dropdown-menu">
-                                <h2 class="dropdown-header">Select Unit</h2>
-                                <button class="dropdown-item" (click)="onChange2($event.target.value)"
+                                <h2 class="dropdown-header">To unit</h2>
+                                <button class="dropdown-item" (click)="onChange2($event.target.value+'b')"
                                     *ngFor="let item of convertMap.get(currentConverter)" [value]=item>
                                     {{ item }}</button>
                             </div>
                         </div>
                     </div>
-                    <!-- <label for="decimalNumber">{{label2}}</label> -->
-                    <input type="number" class="form-control" style="cursor:not-allowed;"
-                        formControlName="decimalNumber" name="decimalNumber" id="decimalNumber"
-                        placeholder="Output decimal Number" readonly="readonly">
+                    <input type="text" class="form-control" style="cursor:not-allowed;" formControlName="decimalNumber"
+                        name="decimalNumber" id="decimalNumber" placeholder="Output decimal Number" readonly="readonly">
                 </div>
 
                 <!-- <button type="submit" class="btn btn-primary btn-outline-light float-right"
