@@ -10,21 +10,31 @@ export class NumberConvert {
     }
 
     convertNum(): string {
+        
         if (this.base1 == '10') {
             console.log("decimal condition")
-            return this.convertDecimalToAny();
+            return this.convertDecimalToAny(this.numberToConvert);
         }
         else if (this.base1 == '2' || this.base1 == '8') {
-            //console.log("bonary condition")
-            return this.convertAnyToDecimal();
+            let toDec:string;
+            console.log("bonary and octa condition")
+            toDec = this.convertAnyToDecimal();
+            return this.convertDecimalToAny(toDec)
+        }
+        else if(this.base1=='16'){
+            let toDec:string;
+            console.log("hexadecimal condition")
+            toDec = this.convertHexaToDecimal();
+            return this.convertDecimalToAny(toDec)
         }
         else {
+            console.log("Some unknown base1 found")
             return '1';
         }
 
     }
-    convertDecimalToAny(): string {
-        let temp = new Number(this.numberToConvert) //this.numberToConvert;
+    convertDecimalToAny(numn:string): string {
+        let temp = new Number(numn) //this.numberToConvert;
         return temp.toString(+this.base2);
     }
     convertAnyToDecimal(): string {
@@ -43,28 +53,33 @@ export class NumberConvert {
 
     createHexaMap():any{
         let m = new Map();
+        
         let alpha = 'A'
         let digit = 0
-        let map = new Map()
+        //let map = new Map()
         while (digit < 10) {
-            map.set(digit.toString(), digit)
+            m.set(digit.toString(), digit)
             digit++
         }
         while (digit < 16) {
-            map.set(alpha, digit)
+            m.set(alpha, digit)
             alpha = String.fromCharCode(alpha.charCodeAt(0) + 1)
             digit++
         }
-
+        // console.log(m)
         return m;
     }
     convertHexaToDecimal(): string {
         let m = this.createHexaMap();
+        //console.log(m)
         let temp2 = 0
         let power=0
-        for (let char of this.numberToConvert){
-            let digit = m[char]
-            temp2 += (Math.pow(16, power)*digit)
+        // console.log("number to convert: " + this.numberToConvert)
+        let reversedString = this.numberToConvert.toUpperCase().split("").reverse().join("") 
+        for (let char1 of reversedString){
+            // console.log(m.get(char1))
+            let digit = m.get(char1)
+            temp2 = (Math.pow(16, power)*digit)+temp2
             power++;
         }
         return temp2.toString();

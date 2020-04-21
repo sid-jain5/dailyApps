@@ -13,6 +13,7 @@ export class ConverterComponent implements OnInit {
 
   currentConverter: String = 'choose';
   fromSubUnit:String = 'Select Unit';
+  gibber:String = 'gibberish'
   toSubUnit:String = 'Select Unit'
   convertForm: FormGroup
   label1: String = "Binary Number:"
@@ -63,6 +64,10 @@ export class ConverterComponent implements OnInit {
   //   })
   // }
 
+  toggleFunction(){
+    alert("toggle button press")
+  }
+
   onChange1(obj) {
     this.currentConverter = obj
     this.fromSubUnit = 'Select Unit';
@@ -104,9 +109,38 @@ export class ConverterComponent implements OnInit {
   }
 
   convert() {
-    let temp = Number(this.convertForm.get('binaryNumber').value)
+    let temp = this.convertForm.get('binaryNumber').value//Number()
+    let unit1='2'
+    let unit2='10'
+    if(this.fromSubUnit=='decimal'){
+      unit1='10'
+    }
+    else if(this.fromSubUnit=='octa'){
+      unit1='8'
+    }
+    else if(this.fromSubUnit=='hexadecimal'){
+      unit1='16'
+    }
+    else{
+      console.log("sum error occured in convert func assigning unit1")
+    }
 
-    let nc: NumberConvert = new NumberConvert('2', '10', temp.toString());
+    if(this.toSubUnit=='binary'){
+      unit2='2'
+    }
+    else if(this.toSubUnit=='octa'){
+      unit2='8'
+    }
+    else if(this.toSubUnit=='hexadecimal'){
+      unit2='16'
+    }
+    else{
+      console.log("sum error occured in convert func assigning unit2")
+    }
+
+    //console.log("in convert func: " + temp)
+
+    let nc: NumberConvert = new NumberConvert(unit1, unit2, temp);
     let ans: string = nc.convertNum()
     this.convertForm.controls['decimalNumber'].setValue(ans)
   }

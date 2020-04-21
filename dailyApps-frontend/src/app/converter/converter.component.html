@@ -15,12 +15,12 @@
                     </button>
                     <div class="dropdown-menu">
                         <h2 class="dropdown-header">Converters</h2>
-                        <button class="dropdown-item" (click)="onChange1($event.target.value)" 
+                        <button class="dropdown-item" (click)="onChange1($event.target.value)"
                             *ngFor="let item of convertMapKeys" [value]=item>
                             {{ item }}
                         </button>
                         <!-- [value]=item can be removed  (click)="onChange1($event.target.value) [value]=item" -->
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="col-md-4 offset-md-4" style="background-color:darkgray;">
             <form [formGroup]="convertForm" (ngSubmit)="convert()" class="form">
                 <div class="form-group">
-                    <div class="btn-group" style="margin: 10px;">
+                    <div class="btn-group" style="margin-top: 10px;">
                         <div class="btn-group dropleft" role="group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -43,14 +43,24 @@
                             </div>
                         </div>
                     </div>
-                    <input type="text" class="form-control" formControlName="binaryNumber" id="binaryNumber"
+                </div>
+                <div class="form-group">
+                    <input  type="text" class="form-control" formControlName="binaryNumber" id="binaryNumber"
                         name="binaryNumber" aria-describedby="numberHelp" placeholder="Enter a binary number here..">
-                    {{ convert()}}
+                    {{fromSubUnit!='Select Unit' && toSubUnit!='Select Unit'?convert():gibber}}
                     <small id="numberHelp" class="form-text text-muted">Number should only contain 0s and 1s</small>
                 </div>
 
+                <!-- disan=ble input fields until selection happens -->
+                <!-- <i class="fas fa-arrows-alt-v"></i> -->
                 <div class="form-group">
-                    <div class="btn-group" style="margin: 10px;">
+                    <button type="button" class="btn btn-secondary px-3 float-right" (click)="toggleFunction()">
+                        <img src="../../assets/elevator-2x.png">
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <div class="btn-group" style="margin-top: 50px;">
                         <div class="btn-group dropleft" role="group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -64,6 +74,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
                     <input type="text" class="form-control" style="cursor:not-allowed;" formControlName="decimalNumber"
                         name="decimalNumber" id="decimalNumber" placeholder="Output decimal Number" readonly="readonly">
                 </div>
