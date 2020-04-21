@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NumberConvert } from '../converters/numberConvert'
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
 import { element } from 'protractor';
+import { LengthConvert } from '../converters/lengthConvert';
+import { TemperatureConvert } from '../converters/temperatureConvert'
 
 @Component({
   selector: 'app-converter',
@@ -11,10 +13,10 @@ import { element } from 'protractor';
 })
 export class ConverterComponent implements OnInit {
 
-  currentConverter: String = 'choose';
-  fromSubUnit:String = 'Select Unit';
-  gibber:String = 'gibberish'
-  toSubUnit:String = 'Select Unit'
+  currentConverter: string = 'choose';
+  fromSubUnit: string = 'Select Unit';
+  gibber: string = 'gibberish'
+  toSubUnit: string = 'Select Unit'
   convertForm: FormGroup
   label1: String = "Binary Number:"
   label2: String = "Decimal Number:"
@@ -22,7 +24,7 @@ export class ConverterComponent implements OnInit {
   // convertList = ['length', 'weight', 'temperature', 'number system', 'computer memory', 'currency']
   convertMap = this.createConvertTypelist()
   convertMapKeys = Array.from(this.convertMap.keys())
-  constructor(private fb: FormBuilder, private router:Router) { 
+  constructor(private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit() {
@@ -64,7 +66,7 @@ export class ConverterComponent implements OnInit {
   //   })
   // }
 
-  toggleFunction(){
+  toggleFunction() {
     alert("toggle button press")
   }
 
@@ -72,34 +74,35 @@ export class ConverterComponent implements OnInit {
     this.currentConverter = obj
     this.fromSubUnit = 'Select Unit';
     this.toSubUnit = 'Select Unit'
-  //   // if (obj == "number system") {
-  //   //   alert("continue")
-  //   // }
-  //   // else {
-  //   //   //console.log("here")
-  //   //   alert("feature not available yet")
-  //   // }
+    //   // if (obj == "number system") {
+    //   //   alert("continue")
+    //   // }
+    //   // else {
+    //   //   //console.log("here")
+    //   //   alert("feature not available yet")
+    //   // }
   }
 
-  onChange2(obj2:string) {
-    if(obj2.substring(obj2.length-1)=='a'){
-      this.fromSubUnit = obj2.substring(0, obj2.length-1)
-  //     //alert('from unit')
+  onChange2(obj2: string) {
+    if (this.currentConverter == 'choose') {
+      alert("Please choose the converter type")
     }
-    else if(obj2.substring(obj2.length-1)=='b'){
-      this.toSubUnit = obj2.substring(0, obj2.length-1)
-  //     // alert('to unit')
+    else if (obj2.substring(obj2.length - 1) == 'a') {
+      this.fromSubUnit = obj2.substring(0, obj2.length - 1)
     }
-    else{
+    else if (obj2.substring(obj2.length - 1) == 'b') {
+      this.toSubUnit = obj2.substring(0, obj2.length - 1)
+    }
+    else {
       alert('Some error occured')
     }
-    
+
   }
   createConvertTypelist() {
     let convertList = new Map()
-    convertList.set('length', ['deca', 'hecto', 'kilo', 'mega', 'giga', 'tera', 'peta'])
+    convertList.set('length', ['deca', 'hecto', 'kilo', 'mega', 'giga', 'tera', 'peta', 'deci', 'centi', 
+    'mili', 'micro', 'nano', 'pico', 'femto'])
     convertList.set('weight', ['abc', 'def'])
-
     convertList.set('temperature', ['celcius', 'farenheit', 'kelvin'])
     convertList.set('number system', ['binary', 'decimal', 'octa', 'hexadecimal'])
     convertList.set('computer memory', ['bits', 'bytes', 'kb', 'mb', 'gb', 'tb'])
@@ -109,39 +112,28 @@ export class ConverterComponent implements OnInit {
   }
 
   convert() {
-    let temp = this.convertForm.get('binaryNumber').value//Number()
-    let unit1='2'
-    let unit2='10'
-    if(this.fromSubUnit=='decimal'){
-      unit1='10'
+    let temp = this.convertForm.get('binaryNumber').value
+    if(temp=='' || temp==null){
+      return
     }
-    else if(this.fromSubUnit=='octa'){
-      unit1='8'
+    let ans:string
+    if (this.currentConverter == 'number system') {
+
+      let nc: NumberConvert = new NumberConvert(this.fromSubUnit, this.toSubUnit, temp);
+      ans = nc.convertNum()
+      this.convertForm.controls['decimalNumber'].setValue(ans)
     }
-    else if(this.fromSubUnit=='hexadecimal'){
-      unit1='16'
+    else if(this.currentConverter == 'length' || this.currentConverter == 'weight'){
+      let lc : LengthConvert = new LengthConvert()
+      ans = lc.converter(this.fromSubUnit, this.toSubUnit, temp)
+    }
+    else if(this.currentConverter == 'temperature'){
+      let tc:TemperatureConvert = new TemperatureConvert(this.fromSubUnit, this.toSubUnit, temp)
+      ans = tc.convert()
     }
     else{
-      console.log("sum error occured in convert func assigning unit1")
+      alert("feature will be available soon")
     }
-
-    if(this.toSubUnit=='binary'){
-      unit2='2'
-    }
-    else if(this.toSubUnit=='octa'){
-      unit2='8'
-    }
-    else if(this.toSubUnit=='hexadecimal'){
-      unit2='16'
-    }
-    else{
-      console.log("sum error occured in convert func assigning unit2")
-    }
-
-    //console.log("in convert func: " + temp)
-
-    let nc: NumberConvert = new NumberConvert(unit1, unit2, temp);
-    let ans: string = nc.convertNum()
     this.convertForm.controls['decimalNumber'].setValue(ans)
   }
 
