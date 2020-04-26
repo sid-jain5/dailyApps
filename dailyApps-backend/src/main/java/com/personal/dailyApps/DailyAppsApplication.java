@@ -10,7 +10,7 @@ public class DailyAppsApplication {
 		SpringApplication.run(DailyAppsApplication.class, args);
 		System.out.println("DailyApps Application Running in background");
 		// Trying final push back end
-		System.out.println("First push");
+		//Push problem fixing
 	}
 
 }

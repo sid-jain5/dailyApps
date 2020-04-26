@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+.loginSection{
+    margin-top:10rem;
+    margin-bottom: 5%;
+  }
+
+  .converter-container{
+    margin-top:10rem;
+    margin-bottom: 5%;
+  }
+
+  body, html {
+    height: 100%;
+  }
+  
+  .bg {
+    /* The image used */
+    background-image: url("/assets/apps3.jpg");
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    overflow-x: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
