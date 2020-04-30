@@ -17,31 +17,25 @@ public class DailyAppsDAOImpl implements DailyAppsDAO{
 
 	
 	@Autowired
-	private EntityManager entityManager;
-	
-	@Override
-	public boolean authenticateUser(String emailId, String password) {
-		// TODO Auto-generated method stub
-		Query query=entityManager.createQuery("SELECT USERNAME FROM UserEntity WHERE EMAIL_ID=:emailId");
-		List<String> usernameList=new ArrayList<String>();
-		usernameList=query.getResultList();
-		Query query1=entityManager.createQuery("SELECT PASSWORD FROM UserEntity WHERE EMAIL_ID=:emailId");
-		List<String> passwordList=new ArrayList<String>();
-		passwordList=query.getResultList();
-		for (String string : passwordList) {
-			for (String string2 : usernameList) {
-				if(string==password)
-					return true;
-			}
-		}
-		return false;
-	}
+	private EntityManager entityManager; 
 
-	@Override
-	public String getHashCode(String emailId) {
-		// TODO Auto-generated method stub
-		
-		return null;
-	}
+//	@Override
+//	public boolean authenticateUser(String emailId, String password) {
+//		// TODO Auto-generated method stub
+//		Query query=entityManager.createQuery("SELECT USERNAME FROM UserEntity WHERE EMAIL_ID=:emailId");
+//		List<String> usernameList=new ArrayList<String>();
+//		usernameList=query.getResultList();
+//		Query query1=entityManager.createQuery("SELECT PASSWORD FROM UserEntity WHERE EMAIL_ID=:emailId");
+//		List<String> passwordList=new ArrayList<String>();
+//		passwordList=query.getResultList();
+//		for (String string : passwordList) {
+//			for (String string2 : usernameList) {
+//				if(string==password)
+//					return true;
+//			}
+//		}
+//		return false;
+//	}
+
 
 }
