@@ -10,4 +10,6 @@ public interface DailyAppsDAO {
 	public Users getUserByUsername(String username) throws Exception;
 	public String addUser(Users user) throws Exception; 
 	public List<String> getUsernameList() throws Exception;
+	public Boolean checkAvailabilityOfUsername(String username);
+	public String deleteUser(String username);
 }
