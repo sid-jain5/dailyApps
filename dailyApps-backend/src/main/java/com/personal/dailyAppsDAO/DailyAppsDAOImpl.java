@@ -47,7 +47,20 @@ public class DailyAppsDAOImpl implements DailyAppsDAO{
 	@Override
 	public String addUser(Users user) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		UserEntity userEntity=entityManager.find(UserEntity.class,user.getUsername());
+		if(userEntity!=null) {
+			userEntity.setEmailId(user.getEmailId());
+			userEntity.setUsername(user.getUsername());
+			userEntity.setName(user.getName());
+			userEntity.setPhoneNumber(user.getPhoneNumber());
+			userEntity.setPassword(user.getPassword());
+			userEntity.setSecurityQuestion(user.getSecurityQuestion());
+			userEntity.setSecurityAnswer(user.getSecurityAnswer());
+			
+			return userEntity.getUsername();
+		
+		}
+		return userEntity.getUsername();
 	}
 
 	@Override
