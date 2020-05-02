@@ -11,5 +11,5 @@ public interface UsersService {
 	public Users authenticateUser(String username, String password) throws Exception;
 	public String addUser(Users user) throws Exception;
 	public List<String> listUsers() throws Exception;
-	public String removeUser() throws Exception;
+	public String removeUser(String username) throws Exception;//Signature Changed
 }
